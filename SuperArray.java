@@ -1,3 +1,4 @@
+ //Special thanks to Christopher Liu and Andy Lin for helping with test cases!
 public class SuperArray{
   private String [] data;
   private int size;
