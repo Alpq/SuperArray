@@ -32,9 +32,12 @@ public class SuperArray{
   }
   public void add(int index, String element)
   {
-    if (size != this.data.length)
+    boolean correct = index > - 1 && index < this.size + 1;
+    correct = index < this.data.length && index > -1;
+    correct = correct && this.size + 1 != this.data.length;
+    if (correct)
     {
-      for (int i = size + 1; i > index - 1; i -- ) {
+      for (int i = size + 1; i > index; i -- ) {
         this.data[i] = this.data[i - 1];
       }
       this.data[index] = element;
@@ -83,11 +86,12 @@ public class SuperArray{
     size = 0;
   }
   public String toString(){
-    String format = "[ ";
-    for (int i = 0; i < this.size - 1 ; i++) {
-      format = format + this.data[i] + ", " ;
+    String format = "[";
+    for (int i = 0; i < this.size; i++) {
+      if ( i < this.size - 1) {format = format + this.data[i] + ", " ;}
+      if ( i == this.size - 1) {format = format + this.data[i];}
     }
-    return format + this.data[this.size -1] + "}";
+    return format + "]";
   }
   public boolean contains(String s)
   {
