@@ -1,4 +1,4 @@
- //Special thanks to Christopher Liu and Andy Lin for helping with test cases!
+ //Special thanks to Christopher Liu Andy Lin, and Reng Zheng for helping with test cases!
 public class SuperArray{
   private String [] data;
   private int size;
@@ -47,12 +47,14 @@ public class SuperArray{
     String removed = this.data[index];
     if (index != size)
     {
-    for (int i = index; i < size ; i ++ ) {
-      this.data[i] = this.data[i + 1];
+      for (int i = index; i < size ; i ++ ) {
+        this.data[i] = this.data[i + 1];
+      }
+      this.data[size] = null;
+      size --;
     }
-    }
-  else {this.data[index] = null;}
-  return removed;
+    else {this.data[index] = null; size --;}
+    return removed;
   }
   public String get(int index){
     return this.data[index];
