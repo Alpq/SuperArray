@@ -47,17 +47,15 @@ public class SuperArray{
   }
   public String remove(int index)
   {
-    String removed = this.data[index];
-    if (index != size)
-    {
-      for (int i = index; i < size ; i ++ ) {
-        this.data[i] = this.data[i + 1];
+      String removed;
+      removed = this.data[index]; //sets output variable to string in index
+      for (int i = index; i < size; i ++ )
+      {
+        this.data[i] = this.data[i + 1]; // Starting from the index, every value is shifted to the left
       }
-      this.data[size] = null;
-      size --;
-    }
-    else {this.data[index] = null; size --;}
-    return removed;
+      this.data[size] = null; // the last element is set to null
+      size --; // the array is shrunk
+      return removed;
   }
   public String get(int index){
     return this.data[index];
