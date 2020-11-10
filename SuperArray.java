@@ -60,6 +60,9 @@ public class SuperArray{
   public String get(int index){
     return this.data[index];
   }
+  public int get(){
+    return this.size;
+  }
   public String set(int index, String element)
   {
     String replaced = this.data[index];
@@ -116,5 +119,28 @@ public class SuperArray{
       safe[i] = this.data[i];
     }
     return safe;
+  }
+  public int lastIndexOf(String value)
+  {
+    for (int i = this.size; i > 0 ; i -- ) {
+      if (this.data[i] == value){
+      return i;
+      }
+    }
+    return -1;
+  }
+  public boolean equals(SuperArray other)
+  {
+    if (this.size != other.size)
+    {
+      return false;
+    }
+    for (int i = 0; i < this.size ; i++) {
+      if (this.data[i] != other.data[i])
+      {
+        return false;
+      }
+    }
+    return true;
   }
 }
