@@ -8,11 +8,12 @@ public class SuperArray{
     data = new String[10];
   }
   public SuperArray(int initialCapacity){
-  if (initialCapacity > 0)
+  if (initialCapacity < 0)
   {
-    size = 0;
-    data = new String[initialCapacity];
+    throw new IllegalArgumentException("Invalid Size.");
   }
+  size = 0;
+  data = new String[initialCapacity];
   }
   public int size()
   {
@@ -35,18 +36,23 @@ public class SuperArray{
     boolean correct = index > - 1 && index < this.size + 1;
     correct = index < this.data.length && index > -1;
     correct = correct && this.size + 1 != this.data.length;
-    if (correct)
+    if (!correct)
     {
-      for (int i = size + 1; i > index; i -- ) {
-        this.data[i] = this.data[i - 1];
-      }
-      this.data[index] = element;
-      size ++;
+      throw new IndexOutOfBoundsException("Invalid Index.");
     }
-    else {this.resize(); this.add(index, element);}
+    for (int i = size + 1; i > index; i -- )
+    {
+      this.data[i] = this.data[i - 1];
+    }
+    this.data[index] = element;
+    size ++;
   }
   public String remove(int index)
   {
+      if (index < 0 || index > size)
+      {
+        throw new IndexOutOfBoundsException("Invalid Index.");
+      }
       String removed;
       removed = this.data[index]; //sets output variable to string in index
       for (int i = index; i < size; i ++ )
@@ -65,6 +71,10 @@ public class SuperArray{
   }
   public String set(int index, String element)
   {
+    if (index > size || index < 0)
+    {
+      throw new IndexOutOfBoundsException("Invalid Index.");
+    }
     String replaced = this.data[index];
     this.data[index] = element;
     return replaced;
@@ -123,7 +133,8 @@ public class SuperArray{
   public int lastIndexOf(String value)
   {
     for (int i = this.size; i > 0 ; i -- ) {
-      if (this.data[i] == value){
+      if (this.data[i].equals(value))
+      {
       return i;
       }
     }
