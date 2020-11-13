@@ -8,12 +8,19 @@ public class SuperArray{
     data = new String[10];
   }
   public SuperArray(int initialCapacity){
-  if (initialCapacity <= 0)
+  if (initialCapacity < 0)
   {
     throw new IllegalArgumentException("Invalid Size.");
   }
+  else if (initialCapacity == 0)
+  {
+    data = new String[1];
+  }
+  else
+  {
+    data = new String[initialCapacity];
+  }
   size = 0;
-  data = new String[initialCapacity];
   }
   public int size()
   {
@@ -36,20 +43,20 @@ public class SuperArray{
     boolean correct = index > - 1 && index < this.size + 1;
     correct = index < this.data.length && index > -1;
     correct = correct && this.size + 1 != this.data.length;
-    if (!correct)
+    if (correct)
     {
-      throw new IndexOutOfBoundsException("Invalid Index.");
+      for (int i = size + 1; i > index; i -- )
+      {
+        this.data[i] = this.data[i - 1];
+      }
+      this.data[index] = element;
+      size ++;
     }
-    for (int i = size + 1; i > index; i -- )
-    {
-      this.data[i] = this.data[i - 1];
-    }
-    this.data[index] = element;
-    size ++;
+    if (index < 0 || index >= size) {if (index != 0) {throw new IndexOutOfBoundsException("Invalid Index.");}}
   }
   public String remove(int index)
   {
-      if (index < 0 || index > size)
+      if (index < 0 || index >= size)
       {
         throw new IndexOutOfBoundsException("Invalid Index.");
       }
@@ -64,6 +71,10 @@ public class SuperArray{
       return removed;
   }
   public String get(int index){
+    if ((size == 0 || index < 0) || index >= size)
+    {
+      throw new IndexOutOfBoundsException("Invalid Index.");
+    }
     return this.data[index];
   }
   public int get(){
@@ -71,7 +82,7 @@ public class SuperArray{
   }
   public String set(int index, String element)
   {
-    if (index > size || index < 0)
+    if ((index >= size || index < 0) || size == 0)
     {
       throw new IndexOutOfBoundsException("Invalid Index.");
     }
@@ -132,11 +143,17 @@ public class SuperArray{
   }
   public int lastIndexOf(String value)
   {
-    for (int i = this.size; i > 0 ; i -- ) {
-      if (this.data[i].equals(value))
+    for (int i = this.size; i >= 0 ; i -- )
+    {
+      try
       {
-      return i;
+        if (this.data[i].equals(value))
+        {
+        return i;
+        }
       }
+      catch (NullPointerException e)
+      {}
     }
     return -1;
   }
@@ -147,7 +164,7 @@ public class SuperArray{
       return false;
     }
     for (int i = 0; i < this.size ; i++) {
-      if (this.data[i] != other.data[i])
+      if (!this.data[i].equals(other.data[i]))
       {
         return false;
       }
