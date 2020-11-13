@@ -8,7 +8,7 @@ public class SuperArray{
     data = new String[10];
   }
   public SuperArray(int initialCapacity){
-  if (initialCapacity < 0)
+  if (initialCapacity <= 0)
   {
     throw new IllegalArgumentException("Invalid Size.");
   }
